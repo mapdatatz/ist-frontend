@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { handleMemberPayments } from "../../../api/payments";
 import { ImFilePdf } from "react-icons/im";
 import formatMoney from "../../../utils/formatMoney";
 import { TfiCreditCard } from "react-icons/tfi";

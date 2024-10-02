@@ -35,7 +35,7 @@ export default function UpdateExpertise({
   useEffect(() => {
     form.setFieldsValue({ name: selected?.name });
     form.setFieldsValue({ description: selected?.description });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

@@ -72,7 +72,7 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
     form.setFieldsValue({ workplace: selected?.workplace });
     form.setFieldsValue({ membership: selected?.membership?._id });
     setType(selected?.isCorporate ? types[1] : types[0])
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

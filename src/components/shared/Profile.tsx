@@ -1,7 +1,5 @@
 import { useContext } from "react";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Dismiss from "./Dismiss";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FiUser } from "react-icons/fi";
@@ -10,22 +8,15 @@ export default function Profile({ isVisible, setVisible }: any) {
   const { user, signoutUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const location = useLocation();
-
   if (!user) {
     return <></>;
   }
 
   const {
-    firstname = "",
-    lastname = "",
     mobile = "",
     email = "",
-    role = { name: "" },
     site = {},
   } = user;
-  const shortname =
-    firstname === null ? "--" : `${firstname.charAt(0)}${lastname.charAt(0)} `;
 
   const toggleProfile = () => {
     setVisible(!isVisible);

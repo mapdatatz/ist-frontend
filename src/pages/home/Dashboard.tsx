@@ -14,7 +14,6 @@ import SideChart from "./components/SideChart";
 
 export default function Dashboard() {
   const today = new Date();
-  const [isFiltered, setFiltered] = useState<boolean>(false);
   const [year, setYear] = useState({ year: today?.getFullYear() });
   const { data: years } = useQuery({
     queryKey: ["years"],
@@ -29,7 +28,6 @@ export default function Dashboard() {
 
   const clearDate = () => {
     setYear({ year: today?.getFullYear() });
-    setFiltered(false);
   };
 
   const rangeOptions = (
@@ -42,7 +40,6 @@ export default function Dashboard() {
           <button
             onClick={() => {
               setYear(item);
-              setFiltered(true);
             }}
             className="py-1 border-t focus:outline-none w-full flex items-start"
           >

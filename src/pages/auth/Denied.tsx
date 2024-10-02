@@ -32,6 +32,7 @@ export default function Denied() {
           <a
             href="https://ist.co.tz"
             target={"_blank"}
+            rel="noreferrer"
           >
             https://ist.co.tz
           </a>

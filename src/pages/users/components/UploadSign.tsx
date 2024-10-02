@@ -1,4 +1,4 @@
-import { Button, Modal, Form, message, Input } from "antd";
+import { Button, Modal, Form, Input } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { BsCheck2Circle } from "react-icons/bs";
 import getBase64 from "../../../utils/getBase64";
@@ -15,7 +15,6 @@ export default function UploadSign({
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState(false);
   const [selectedFile, setSelectedFile]: any = useState(null);
-  const [swalProps, setSwalProps] = useState({});
   const [form] = Form.useForm();
 
   const changeHandler = (event: any) => {
@@ -44,27 +43,14 @@ export default function UploadSign({
     const uri = `api/users/${selected?._id}/signature`;
     const response = await postData({ data, uri, token: auth?._id });
     if (response.success) {
-      setSwalProps({
-        show: true,
-        title: "Uploaded",
-        text: "Signature Uploaded Successfully",
-        icon: "success",
-      });
       await refetch();
       setVisible(false);
       await refetch();
       setLoading(false);
     } else {
-      setSwalProps({
-        show: true,
-        title: "Sorry",
-        text: "Something went wrong",
-        icon: "error",
-      });
       await refetch();
       setVisible(false);
       setLoading(false);
-      setSwalProps({});
       setLoading(false);
       return;
     }
@@ -84,7 +70,7 @@ export default function UploadSign({
     form.resetFields();
     setSelectedFile(null);
     setIsSelected(false);
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

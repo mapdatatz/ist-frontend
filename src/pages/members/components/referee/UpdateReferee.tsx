@@ -37,7 +37,7 @@ export default function UpdateReferee({
     form.setFieldsValue({ email: selected?.email });
     form.setFieldsValue({ mobile: selected?.mobile });
     form.setFieldsValue({ office: selected?.office });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

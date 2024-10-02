@@ -48,7 +48,7 @@ export default function UpdateInstitute({
     form.setFieldsValue({ plot: selected?.plot });
     form.setFieldsValue({ website: selected?.website });
     form.setFieldsValue({ tollfree: selected?.tollfree });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

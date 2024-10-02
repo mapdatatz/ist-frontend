@@ -1,6 +1,5 @@
 import { Button, Modal, Form, Row, message, Select, Col } from "antd";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { handleFetchYears } from "../../../api/years";
 import { handleCreatePayment } from "../../../api/payments";
 
@@ -14,8 +13,6 @@ export default function CreatePayment({ isVisible, setVisible }: any) {
     queryKey: ["years"],
     queryFn: () => handleFetchYears(),
   });
-
-  const [selectedMembership, setSelectedMembership] = useState<any>(null);
 
   const { mutate, isPending } = useMutation({
     mutationFn: handleCreatePayment,

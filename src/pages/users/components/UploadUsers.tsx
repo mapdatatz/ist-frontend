@@ -47,7 +47,7 @@ export default function UploadUsers({ isVisible, setVisible, selected }: any) {
     form.resetFields();
     setSelectedFile(null);
     setIsSelected(false);
-  }, []);
+  }, [form]);
 
   return (
     <Modal

@@ -14,8 +14,6 @@ import sign from "../../assets/images/sign.jpg";
 
 export default function Institute() {
   const { user } = useContext(AuthContext);
-
-  const [selected, setSelected] = useState<any>({});
   const [updateModal, setUpdateModal] = useState<boolean>(false);
 
   const {
@@ -116,6 +114,7 @@ export default function Institute() {
                     <a
                       href={institute?.website}
                       target="_blank"
+                      rel="noreferrer"
                       className="text-blue-600 text-xs"
                     >
                       {institute?.website}

@@ -34,7 +34,7 @@ export default function UpdateMembership({ isVisible, setVisible, selected }: an
     form.resetFields();
     form.setFieldsValue({ category: selected?.category });
     form.setFieldsValue({ fee: selected?.fee });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

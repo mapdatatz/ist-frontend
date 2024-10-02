@@ -14,13 +14,11 @@ export default function UpdatePassword({ isVisible, setVisible }: any) {
 
   const onSubmit = async () => {
     setLoading(true);
-    const values = await form.validateFields();
     const { password } = form.getFieldsValue();
     const score = password.length === 0 ? -1 : zxcvbn(password).score;
     if (score < 3) {
       message.error("Use stronger password");
     } else {
-      const uri = `users/${user?._id}/password/update`;
       const response: any = {};
       if (response.success) {
         message.success("Updated successfully");

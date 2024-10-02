@@ -10,12 +10,10 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import UpdateDetails from "./components/UpdateDetails";
 import UpdatePassword from "./components/UpdatePassword";
 import { GoChevronLeft } from "react-icons/go";
-import { Link } from "react-router-dom";
 
 export default function MyProfile() {
   const [detailsModal, setDetailsModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
-  const [isLoading, setLoading] = useState(false);
   const { user, signoutUser } = useContext(AuthContext);
 
 
@@ -50,13 +48,11 @@ export default function MyProfile() {
             </button>
             <UpdateDetails
               isVisible={detailsModal}
-              isLoading={isLoading}
               setVisible={setDetailsModal}
             />
 
             <UpdatePassword
               isVisible={passwordModal}
-              isLoading={isLoading}
               setVisible={setPasswordModal}
             />
           </div>

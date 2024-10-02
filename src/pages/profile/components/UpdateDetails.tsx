@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 
-import { Button, Modal, Form, Row, Col, Input, message, Select } from "antd";
+import { Button, Modal, Form, Row, Col, Input, message } from "antd";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleUpdateProfile } from "../../../api/users";

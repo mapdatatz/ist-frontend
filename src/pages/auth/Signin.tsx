@@ -29,7 +29,7 @@ export default function Signin() {
     } else {
       setIsButtonDisabled(true);
     }
-  }, [email, password, navigate]);
+  }, [email, password, navigate, token]);
 
   const handleSignin = async (e: any) => {
     try {

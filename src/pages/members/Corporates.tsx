@@ -7,13 +7,11 @@ import { LuPlus } from "react-icons/lu";
 import { ExportToExcel } from "../../utils/exportExcel";
 
 import CreateMember from "./components/CreateMember";
-import UpdateMember from "./components/UpdateMember";
 import { useQuery } from "@tanstack/react-query";
 import Something from "../../components/shared/Something";
 import {
   handleExportMembers,
   handleFetchCorporates,
-  handleFetchMembers,
 } from "../../api/members";
 import Moment from "react-moment";
 import { BiBuildingHouse, BiUser } from "react-icons/bi";
@@ -25,9 +23,7 @@ const { Search } = Input;
 
 export default function Members() {
   const { user } = useContext(AuthContext);
-  const [selected, setSelected] = useState<any>({});
   const [createModal, setCreateModal] = useState<boolean>(false);
-  const [updateModal, setUpdateModal] = useState<boolean>(false);
   const [isExporting, setExporting] = useState<boolean>(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -319,12 +315,6 @@ export default function Members() {
             refetch={handleRefetch}
           />
 
-          <UpdateMember
-            isVisible={updateModal}
-            setVisible={setUpdateModal}
-            refetch={refetch}
-            selected={selected}
-          />
         </div>
       </div>
     </div>

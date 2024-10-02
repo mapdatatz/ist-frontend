@@ -39,7 +39,7 @@ export default function UpdateEducation({
     form.setFieldsValue({ startYear: selected?.startYear });
     form.setFieldsValue({ endYear: selected?.endYear });
     form.setFieldsValue({ result: selected?.result });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

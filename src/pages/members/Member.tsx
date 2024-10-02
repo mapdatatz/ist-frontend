@@ -19,7 +19,6 @@ import MemberDetails from "./components/MemberDetails";
 export default function Member({}: any) {
   const { user } = useContext(AuthContext);
   const [updateModal, setUpdateModal] = useState<boolean>(false);
-  const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [statementModal, setStatementModal] = useState<boolean>(false);
 
   const { id } = useParams();
@@ -70,6 +69,7 @@ export default function Member({}: any) {
                             <a
                               href={member?.website}
                               target="_blank"
+                              rel="noreferrer"
                               className="mx-1 flex items-center"
                             >
                               <IoLinkOutline /> website
@@ -114,9 +114,7 @@ export default function Member({}: any) {
                     </button>
 
                     <button
-                      onClick={() => {
-                        setDeleteModal(true);
-                      }}
+                      onClick={() => {}}
                       className="flex justify-center items-center ml-1 text-gray-600 border rounded-md p-2 bg-red-100 hover:bg-red-200 cursor-not-allowed"
                     >
                       <RiDeleteBinLine color="red" />

@@ -1,7 +1,6 @@
 import { message, Table, Tooltip } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { RiFileExcel2Line, RiDeleteBinLine } from "react-icons/ri";
-import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { SlReload } from "react-icons/sl";
 
 import { LuUpload, LuPlus } from "react-icons/lu";

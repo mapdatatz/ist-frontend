@@ -10,10 +10,6 @@ function getInitialUser() {
 }
 
 
-function getInitialInstitute() {
-  const user = localStorage.getItem("institute");
-  return user ? JSON.parse(user) : null;
-}
 
 function getInitialToken() {
   const token = localStorage.getItem("token");
@@ -23,7 +19,6 @@ function getInitialToken() {
 const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<any>(getInitialUser);
   const [token, setToken] = useState<any>(getInitialToken);
-  const [institute, setInstitute] = useState<any>(getInitialInstitute);
   const [menuOpen, setMenuOpen] = useState<boolean>(true);
 
   const navigate = useNavigate();
@@ -43,12 +38,6 @@ const AuthProvider = ({ children }: any) => {
   const updateUser = (user: any) => {
     localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
-  };
-
-
-  const updateInstitute = (institute: any) => {
-    localStorage.setItem("institute", JSON.stringify(institute));
-    setInstitute(institute);
   };
 
   const signoutUser = () => {
@@ -76,7 +65,6 @@ const AuthProvider = ({ children }: any) => {
     setToken,
     signinUser,
     signoutUser,
-    updateInstitute,
     updateUser,
   };
 

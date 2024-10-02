@@ -33,7 +33,6 @@ export default function Payments() {
   const [receiptModal, setReceiptModal] = useState<boolean>(false);
   const [isExporting, setExporting] = useState<boolean>(false);
   const [year, setYear] = useState({ year: today?.getFullYear() });
-  const [isFiltered, setFiltered] = useState<boolean>(false);
   const [form] = Form.useForm();
 
   const { data: years } = useQuery({
@@ -91,7 +90,6 @@ export default function Payments() {
 
   const clearDate = () => {
     setYear({ year: today?.getFullYear() });
-    setFiltered(false);
   };
 
   const handleRefetch = () => {
@@ -99,8 +97,8 @@ export default function Payments() {
   };
 
   useEffect(() => {
-    refetch();
-  }, [year]);
+    handleRefetch();
+  }, [year, handleRefetch]);
 
   const rangeOptions = (
     <div>
@@ -112,7 +110,6 @@ export default function Payments() {
           <button
             onClick={() => {
               setYear(item);
-              setFiltered(true);
             }}
             className="py-1 border-t focus:outline-none w-full flex items-start"
           >

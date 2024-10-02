@@ -42,7 +42,7 @@ export default function DeleteAddress({
     form.setFieldsValue({ street: selected?.street });
     form.setFieldsValue({ block: selected?.block });
     form.setFieldsValue({ plot: selected?.plot });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

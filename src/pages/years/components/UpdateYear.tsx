@@ -35,7 +35,7 @@ export default function UpdateYear({ isVisible, setVisible, selected }: any) {
     form.resetFields();
     form.setFieldsValue({ year: selected?.year });
     form.setFieldsValue({ expectedAmount: selected?.expectedAmount });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

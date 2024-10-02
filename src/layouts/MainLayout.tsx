@@ -13,7 +13,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function MainLayout() {
-  const { menuOpen, setMenuOpen } = useContext(AuthContext);
+  const { menuOpen } = useContext(AuthContext);
   const menus = [
     {
       id: 1,

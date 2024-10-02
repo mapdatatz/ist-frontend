@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { RiFileExcel2Line, RiDeleteBinLine } from "react-icons/ri";
 import { SlReload } from "react-icons/sl";
 
-import { LuUpload, LuPlus } from "react-icons/lu";
+import {  LuPlus } from "react-icons/lu";
 
 import { FiEdit } from "react-icons/fi";
 import { ExportToExcel } from "../../utils/exportExcel";
@@ -23,7 +23,6 @@ export default function Users() {
   const [selected, setSelected] = useState<any>({});
   const [createModal, setCreateModal] = useState<boolean>(false);
   const [updateModal, setUpdateModal] = useState<boolean>(false);
-  const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [isExporting, setExporting] = useState<boolean>(false);
 
   const [pagination, setPagination] = useState<any>({
@@ -104,7 +103,6 @@ export default function Users() {
               setSelected({
                 ...record,
               });
-              setDeleteModal(true);
             }}
             className="flex justify-center items-center ml-1 text-gray-700 border rounded-md p-2 bg-red-100 hover:bg-red-200 cursor-not-allowed"
           >

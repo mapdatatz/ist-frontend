@@ -44,7 +44,7 @@ export default function ResetPassword({
 
   useEffect(() => {
     form.resetFields();
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

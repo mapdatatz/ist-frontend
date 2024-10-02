@@ -40,7 +40,7 @@ export default function UpdateUser({ isVisible, setVisible, selected }: any) {
     form.setFieldsValue({ isActive: selected?.isActive });
     form.setFieldsValue({ isAdmin: selected?.isAdmin });
     form.setFieldsValue({ accessLevel: selected?.accessLevel });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal

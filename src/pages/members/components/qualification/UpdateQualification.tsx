@@ -36,7 +36,7 @@ export default function UpdateQualification({
     form.setFieldsValue({ title: selected?.title });
     form.setFieldsValue({ year: selected?.year });
     form.setFieldsValue({ description: selected?.description });
-  }, [selected]);
+  }, [selected, form]);
 
   return (
     <Modal
