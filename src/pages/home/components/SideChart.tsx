@@ -16,7 +16,7 @@ export default function SideChart({ metrics, year }: any) {
       <div className="grid grid-cols-12 p-6">
         <div className="col-span-12 mb-6">
           <div className="">
-            <div className="text-6xl font-bold">{percentage}%</div>
+            <div className="text-6xl font-bold">{isNaN(percentage) ? 0 : percentage}%</div>
             <div className="text-xs text-start">PAID MEMBERS : {year}</div>
           </div>
         </div>
