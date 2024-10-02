@@ -1,8 +1,8 @@
-const {REACT_APP_API_URL} = process.env
+const {BASE_API_URL} = process.env
 
 const deleteData = async ({ data, uri }: any) => {
   try {
-    const response = await fetch(`${REACT_APP_API_URL}/${uri}`, {
+    const response = await fetch(`${BASE_API_URL}/${uri}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

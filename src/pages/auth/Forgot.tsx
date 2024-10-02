@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.png";
 import spin from "../../assets/images/spin.svg";
 import { BiChevronLeft } from "react-icons/bi";
 import { Input, message } from "antd";
-const {REACT_APP_API_URL} = process.env
+const {BASE_API_URL} = process.env
 
 export default function Forgot() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -25,7 +25,7 @@ export default function Forgot() {
     setLoading(true);
     const uri = `users/email/${email}`;
 
-    const res = await fetch(`${REACT_APP_API_URL}/${uri}`, {
+    const res = await fetch(`${BASE_API_URL}/${uri}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export default function Forgot() {
         link: `http://localhost:3000/reset?token=${response?.payload?._id}&email=${email}&code=${response?.payload?.code}`,
       };
       const uri = `mail/password/reset`;
-      const result = await fetch(`${REACT_APP_API_URL}/${uri}`, {
+      const result = await fetch(`${BASE_API_URL}/${uri}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
