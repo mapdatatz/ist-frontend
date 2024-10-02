@@ -1,8 +1,8 @@
-const {BASE_API_URL} = process.env
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 const postData = async ({ data, uri }: any) => {
   try{
-  const response = await fetch(`${BASE_API_URL}/${uri}`, {
+  const response = await fetch(`${REACT_APP_API_URL}/${uri}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

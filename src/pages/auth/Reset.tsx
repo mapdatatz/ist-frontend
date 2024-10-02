@@ -7,7 +7,7 @@ import { BiChevronLeft } from "react-icons/bi";
 import { Col, Form, message, Row } from "antd";
 import React from "react";
 import zxcvbn from "zxcvbn";
-const {BASE_API_URL} = process.env
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 function useQuery() {
   const { search } = useLocation();
@@ -45,7 +45,7 @@ export default function Reset() {
         code: userCode,
       };
       const uri = "users/password/reset/self";
-      const res = await fetch(`${BASE_API_URL}/${uri}`, {
+      const res = await fetch(`${REACT_APP_API_URL}/${uri}`, {
         method: "POST",
         headers: {
           Accept: "application/json",

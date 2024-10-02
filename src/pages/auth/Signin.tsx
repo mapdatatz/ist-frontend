@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import "../../assets/styles/waves.css";
 import { Link } from "react-router-dom";
-const {BASE_API_URL} = process.env
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function Signin() {
   const { token, signinUser } = useContext(AuthContext);
@@ -38,7 +38,7 @@ export default function Signin() {
       const data = { email, password };
       const uri = `v1/users/login`;
 
-      const res = await fetch(`${BASE_API_URL}/${uri}`, {
+      const res = await fetch(`${REACT_APP_API_URL}/${uri}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
