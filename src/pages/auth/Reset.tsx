@@ -7,7 +7,7 @@ import { BiChevronLeft } from "react-icons/bi";
 import { Col, Form, message, Row } from "antd";
 import React from "react";
 import zxcvbn from "zxcvbn";
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+import REACT_APP_API_URL from "../../utils/baseUrl"
 
 function useQuery() {
   const { search } = useLocation();

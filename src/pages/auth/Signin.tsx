@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import "../../assets/styles/waves.css";
 import { Link } from "react-router-dom";
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+import REACT_APP_API_URL from "../../utils/baseUrl"
 
 export default function Signin() {
   const { token, signinUser } = useContext(AuthContext);

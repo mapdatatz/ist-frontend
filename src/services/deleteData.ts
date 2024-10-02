@@ -1,4 +1,5 @@
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+import REACT_APP_API_URL from "../utils/baseUrl"
+
 
 const deleteData = async ({ data, uri }: any) => {
   try {

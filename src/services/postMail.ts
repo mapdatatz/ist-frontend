@@ -1,4 +1,4 @@
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+import REACT_APP_API_URL from "../utils/baseUrl"
 import Cookies from "js-cookie";
 
 const postMail = async ({ data, uri }: any) => {
