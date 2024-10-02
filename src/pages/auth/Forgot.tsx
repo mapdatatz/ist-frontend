@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.png";
 import spin from "../../assets/images/spin.svg";
 import { BiChevronLeft } from "react-icons/bi";
 import { Input, message } from "antd";
-import REACT_APP_API_URL from "../../utils/baseUrl"
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function Forgot() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
