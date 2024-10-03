@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext<any>(null!);
 
 function getInitialUser() {
-  const user = localStorage.getItem("user");
+  const user = sessionStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 }
 
 
 
 function getInitialToken() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   return token ? token : null;
 }
 
@@ -26,8 +26,8 @@ const AuthProvider = ({ children }: any) => {
   const signinUser = (payload: any) => {
     const { user, token } = payload;
     if (token) {
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", JSON.stringify(token));
+      sessionStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("token",token);
       setUser(user);
       setToken(token)
       navigate('/dashboard')
@@ -36,14 +36,13 @@ const AuthProvider = ({ children }: any) => {
   };
 
   const updateUser = (user: any) => {
-    localStorage.setItem("user", JSON.stringify(user));
+    sessionStorage.setItem("user", JSON.stringify(user));
     setUser(user);
   };
 
   const signoutUser = () => {
-    localStorage.setItem("user", "");
-    localStorage.setItem("admin", "");
-    localStorage.setItem("token", "");
+    sessionStorage.setItem("user", "");
+    sessionStorage.setItem("token", "");
     setUser(null);
     setToken(null);
     navigate("/signin");

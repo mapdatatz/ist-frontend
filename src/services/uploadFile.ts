@@ -1,9 +1,16 @@
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 const uploadFile = async ({ file, uri }: any) => {
   try {
+    const token = sessionStorage.getItem("token");
+    const headers: HeadersInit = token
+      ? {
+          Authorization: `Bearer ${token}`,
+        }
+      : {};
     const response = await fetch(`${REACT_APP_API_URL}/${uri}`, {
       method: "PATCH",
+      headers,
       body: file,
     });
     if (!response.ok) {

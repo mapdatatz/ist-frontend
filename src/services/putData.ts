@@ -2,12 +2,19 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 const putData = async ({ data, uri }: any) => {
   try {
+
+    const token = sessionStorage.getItem("token");
+    const headers: HeadersInit = token
+    ? {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      }
+    : {
+        "Content-Type": "application/json",
+      };
     const response = await fetch(`${REACT_APP_API_URL}/${uri}`, {
       method: "PUT",
-      headers: {
-        Accept: "application",
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify(data),
     });
     if (!response.ok) {

@@ -3,13 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { RiFileExcel2Line, RiFilterOffLine } from "react-icons/ri";
 import { SlReload } from "react-icons/sl";
 
-import { LuPlus } from "react-icons/lu";
 import { ImFilePdf } from "react-icons/im";
 
 import { TfiCreditCard } from "react-icons/tfi";
 import { ExportToExcel } from "../../utils/exportExcel";
 
-import CreatePayment from "./components/CreatePayment";
 import MemberPayment from "./components/MemberPayment";
 import { useQuery } from "@tanstack/react-query";
 import Something from "../../components/shared/Something";
@@ -28,7 +26,6 @@ export default function Payments() {
   const { user } = useContext(AuthContext);
   const today = new Date();
   const [selected, setSelected] = useState<any>({});
-  const [createModal, setCreateModal] = useState<boolean>(false);
   const [updateModal, setUpdateModal] = useState<boolean>(false);
   const [receiptModal, setReceiptModal] = useState<boolean>(false);
   const [isExporting, setExporting] = useState<boolean>(false);
@@ -98,7 +95,7 @@ export default function Payments() {
 
   useEffect(() => {
     handleRefetch();
-  }, [year, handleRefetch]);
+  }, [year]);
 
   const rangeOptions = (
     <div>
@@ -369,14 +366,6 @@ export default function Payments() {
                     )}
                   </button>
                 </Tooltip>
-                {user?.isAdmin && (
-                  <button
-                    onClick={() => setCreateModal(true)}
-                    className="flex mx-2 justify-center items-center border px-4 py-1 h-10 hover:bg-gray-100"
-                  >
-                    <LuPlus size={18} /> <span className="mx-2">New</span>
-                  </button>
-                )}
               </div>
             </div>
             {isError ? (
@@ -403,12 +392,6 @@ export default function Payments() {
           </div>
         </div>
       </div>
-
-      <CreatePayment
-        isVisible={createModal}
-        setVisible={setCreateModal}
-        refetch={handleRefetch}
-      />
 
       <MemberPayment
         isVisible={updateModal}

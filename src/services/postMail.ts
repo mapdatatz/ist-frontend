@@ -3,13 +3,19 @@ import Cookies from "js-cookie";
 
 const postMail = async ({ data, uri }: any) => {
   try {
-    const token = Cookies.get("token");
+
+    const token = sessionStorage.getItem("token");
+    const headers: HeadersInit = token
+    ? {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      }
+    : {
+        "Content-Type": "application/json",
+      };
     const response = await fetch(`${REACT_APP_API_URL}/${uri}`, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
       body: JSON.stringify(data),
     });
     if (!response.ok) {
