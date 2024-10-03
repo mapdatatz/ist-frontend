@@ -39,6 +39,10 @@ export default function Addresses({ member }: any) {
                     {address?.region || "-"}
                   </div>
                   <div className="">
+                    <span className="font-bold">District: </span>
+                    {address?.district || "-"}
+                  </div>
+                  <div className="">
                     <span className="font-bold">Ward: </span>
                     {address?.ward || "-"}
                   </div>

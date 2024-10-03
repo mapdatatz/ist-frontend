@@ -97,6 +97,20 @@ export default function CreateAddress({ isVisible, setVisible, member }: any) {
           <Row gutter={[16, 0]}>
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Form.Item
+                name="district"
+                label="District"
+                rules={[
+                  {
+                    required: false,
+                    message: "Please enter district",
+                  },
+                ]}
+              >
+                <Input type="text" placeholder="District" />
+              </Form.Item>
+            </Col>
+            <Col xs={{ span: 24 }} lg={{ span: 12 }}>
+              <Form.Item
                 name="ward"
                 label="Ward"
                 rules={[
@@ -109,6 +123,9 @@ export default function CreateAddress({ isVisible, setVisible, member }: any) {
                 <Input type="text" placeholder="Ward" />
               </Form.Item>
             </Col>
+          </Row>
+
+          <Row gutter={[16, 0]}>
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Form.Item
                 name="street"
@@ -123,9 +140,6 @@ export default function CreateAddress({ isVisible, setVisible, member }: any) {
                 <Input type="text" placeholder="Street" />
               </Form.Item>
             </Col>
-          </Row>
-
-          <Row gutter={[16, 0]}>
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Form.Item
                 name="block"
@@ -140,6 +154,8 @@ export default function CreateAddress({ isVisible, setVisible, member }: any) {
                 <Input type="text" placeholder="Block" />
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={[16, 0]}>
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Form.Item
                 name="plot"

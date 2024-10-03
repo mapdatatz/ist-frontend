@@ -60,7 +60,8 @@ export default function ReceiptPanel({
         <div className="mb-8">Received from  <span className="font-bold">{selected?.name}</span> {selected?.memberId ? `with Member ID IST-${selected?.memberId}` : ""}, Being payment for <span className="font-bold">{year}</span> an amount of <span className="font-bold">{formatMoney(selected?.paidAmount)}/ = TZS</span> as a <span className="font-bold">{selected?.membership?.category}</span> member</div>
         <div className="">With thanks</div>
         <div className=""><img src={sign} width={100} alt="" /></div>
-        <div className="">For: Burser Office</div>
+        <div className="font-bold">William Mpeli</div>
+        <div className="">For: Treasury Office</div>
         </div>
       </div>
       </div>

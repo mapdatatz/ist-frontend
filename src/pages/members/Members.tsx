@@ -17,6 +17,7 @@ import moment from "moment";
 import { IoLinkOutline } from "react-icons/io5";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
+import MemberTime from "./components/MemberTime";
 const { Search } = Input;
 
 export default function Members() {
@@ -148,6 +149,17 @@ export default function Members() {
                 <Moment format="DD/MM/YYYY">{record?.dateRegistered}</Moment>
               </div>
             </div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "TENURE",
+      width: 180,
+      render: (record: any) => {
+        return (
+          <div className="flex flex-col justify-start ">
+          <MemberTime date1={record?.createdAt} date2={new Date()} />
           </div>
         );
       },

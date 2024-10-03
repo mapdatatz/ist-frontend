@@ -9,16 +9,14 @@ import { ExportToExcel } from "../../utils/exportExcel";
 import CreateMember from "./components/CreateMember";
 import { useQuery } from "@tanstack/react-query";
 import Something from "../../components/shared/Something";
-import {
-  handleExportMembers,
-  handleFetchCorporates,
-} from "../../api/members";
+import { handleExportMembers, handleFetchCorporates } from "../../api/members";
 import Moment from "react-moment";
 import { BiBuildingHouse, BiUser } from "react-icons/bi";
 import moment from "moment";
 import { IoLinkOutline } from "react-icons/io5";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
+import MemberTime from "./components/MemberTime";
 const { Search } = Input;
 
 export default function Members() {
@@ -154,6 +152,17 @@ export default function Members() {
       },
     },
     {
+      title: "TENURE",
+      width: 180,
+      render: (record: any) => {
+        return (
+          <div className="flex flex-col justify-start ">
+            <MemberTime date1={record?.createdAt} date2={new Date()} />
+          </div>
+        );
+      },
+    },
+    {
       title: "STATUS",
       width: 180,
       render: (record: any) => {
@@ -228,8 +237,8 @@ export default function Members() {
       <div className="col-span-12 sm:col-span-12 md:col-span-12">
         <div className="bg-gray-100 min-w-full border overflow-hidden">
           <div className="bg-white">
-          <div className="flex flex-col sm:flex-row justify-between border-b p-2">
-          <div className="flex flex-col mb-2 sm:mb-0">
+            <div className="flex flex-col sm:flex-row justify-between border-b p-2">
+              <div className="flex flex-col mb-2 sm:mb-0">
                 <div className="flex items-center">
                   <div className="font-bold">Corporates : </div>
                   <div className="text-gray-600 text-xs mt-1 mx-1">
@@ -314,7 +323,6 @@ export default function Members() {
             setVisible={setCreateModal}
             refetch={handleRefetch}
           />
-
         </div>
       </div>
     </div>
