@@ -19,6 +19,9 @@ const deleteData = async ({ data, uri }: any) => {
       body: JSON.stringify(data),
     });
     if (!response.ok) {
+      if (response.status === 401 || response.status === 403) {
+        sessionStorage.clear();
+      }
       const errorData = await response.json();
       return Promise.reject(errorData.message || "Something went wrong");
     }

@@ -27,13 +27,10 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
   ];
   const [type, setType] = useState(selected?.isCorporate ? types[1] : types[0]);
 
-
   const { data: memberships } = useQuery({
     queryKey: ["memberships"],
     queryFn: () => handleFetchMemberships(),
   });
-
-
 
   const { mutate, isPending } = useMutation({
     mutationFn: handleUpdateMember,
@@ -71,7 +68,7 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
     form.setFieldsValue({ college: selected?.college });
     form.setFieldsValue({ workplace: selected?.workplace });
     form.setFieldsValue({ membership: selected?.membership?._id });
-    setType(selected?.isCorporate ? types[1] : types[0])
+    setType(selected?.isCorporate ? types[1] : types[0]);
   }, [selected, form]);
 
   return (
@@ -122,7 +119,7 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
             </button>
           ))}
         </div>
-          <div className="">
+        <div className="">
           <Row gutter={[16, 0]}>
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Form.Item
@@ -144,7 +141,7 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
                 label="Email Address"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please enter email",
                   },
                 ]}
@@ -160,7 +157,7 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
                 label="Mobile Number"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please enter mobile number",
                   },
                 ]}
@@ -188,7 +185,6 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
                 </Select>
               </Form.Item>
             </Col>
-
           </Row>
 
           {type?.name === "Corporate" && (
@@ -224,6 +220,25 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
             </Row>
           )}
           <Row gutter={[16, 0]}>
+            <Col xs={{ span: 24 }} lg={{ span: 12 }}>
+              <Form.Item
+                name="dateRegistered"
+                label="Date Registered"
+                rules={[
+                  {
+                    required: false,
+                    message: "Please enter date registered",
+                  },
+                ]}
+              >
+                <DatePicker
+                  type="text"
+                  format={"DD/MM/YYYY"}
+                  style={{ width: "100%" }}
+                  placeholder="Date Registered"
+                />
+              </Form.Item>
+            </Col>
 
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Form.Item
@@ -238,13 +253,14 @@ export default function UpdateMember({ isVisible, setVisible, selected }: any) {
               >
                 <DatePicker
                   type="text"
+                  format={"DD/MM/YYYY"}
                   style={{ width: "100%" }}
                   placeholder="Next Upgrade"
                 />
               </Form.Item>
             </Col>
           </Row>
-          </div>
+        </div>
       </Form>
     </Modal>
   );

@@ -83,7 +83,7 @@ export default function Users() {
     },
     {
       title: "ACTION",
-      width: 140,
+      width: 60,
       render: (record: any) => (
         <div className="flex justify-end">
           <button

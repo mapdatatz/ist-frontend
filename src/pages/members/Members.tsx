@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { RiFileExcel2Line, RiFilterOffLine } from "react-icons/ri";
 import { SlReload } from "react-icons/sl";
 
-import { LuPlus } from "react-icons/lu";
+import { LuPlus, LuUpload } from "react-icons/lu";
 import { ExportToExcel } from "../../utils/exportExcel";
 
 import CreateMember from "./components/CreateMember";
@@ -18,6 +18,8 @@ import { IoLinkOutline } from "react-icons/io5";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
 import MemberTime from "./components/MemberTime";
+import formatId from "../../utils/formatId";
+import UploadMembers from "./components/UploadMembers";
 const { Search } = Input;
 
 export default function Members() {
@@ -26,6 +28,7 @@ export default function Members() {
   const [createModal, setCreateModal] = useState<boolean>(false);
   const [updateModal, setUpdateModal] = useState<boolean>(false);
   const [isExporting, setExporting] = useState<boolean>(false);
+  const [uploadModal, setUploadModal] = useState<boolean>(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
@@ -142,7 +145,7 @@ export default function Members() {
             {record?.membership?.category}
             <div className="flex">
               <div className="text-xs text-gray-600">
-                IST-{record?.memberId}
+                {formatId(`IST`, record?.memberId)}
               </div>
               <div className="text-xs text-gray-600 mx-2">
                 Since:{" "}
@@ -159,7 +162,7 @@ export default function Members() {
       render: (record: any) => {
         return (
           <div className="flex flex-col justify-start ">
-          <MemberTime date1={record?.createdAt} date2={new Date()} />
+            <MemberTime date1={record?.dateRegistered} date2={new Date()} />
           </div>
         );
       },
@@ -195,11 +198,15 @@ export default function Members() {
       width: 140,
       render: (record: any) => {
         return (
-          <div className="flex flex-col justify-start ">
-            <Moment format="DD/MM/YYYY">{record?.nextUpgrade}</Moment>
-            <span className="text-xs text-gray-600">
-              [ <Moment fromNow>{record?.nextUpgrade}</Moment> ]
-            </span>
+          <div className="">
+            {record?.nextUpgrade && (
+              <div className="flex flex-col justify-start ">
+                <Moment format="DD/MM/YYYY">{record?.nextUpgrade}</Moment>
+                <span className="text-xs text-gray-600">
+                  [ <Moment fromNow>{record?.nextUpgrade}</Moment> ]
+                </span>
+              </div>
+            )}
           </div>
         );
       },
@@ -280,6 +287,13 @@ export default function Members() {
                     )}
                   </button>
                 </Tooltip>
+
+                <button
+                  onClick={() => setUploadModal(true)}
+                  className="flex mx-2 justify-center items-center border px-4 py-1 h-10 hover:bg-gray-100"
+                >
+                  <LuUpload /> <span className="mx-2">Upload</span>
+                </button>
                 {user?.isAdmin && (
                   <button
                     onClick={() => setCreateModal(true)}
@@ -323,6 +337,13 @@ export default function Members() {
             isVisible={createModal}
             setVisible={setCreateModal}
             refetch={handleRefetch}
+          />
+
+          <UploadMembers
+            isVisible={uploadModal}
+            setVisible={setUploadModal}
+            selected={selected}
+            refetch={refetch}
           />
 
           <UpdateMember

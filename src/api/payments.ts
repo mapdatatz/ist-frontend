@@ -57,8 +57,21 @@ const handleMemberPayments = async ({ memberId }: any) => {
   return response;
 };
 
+
+const handleUpdatePaydate = async ({ _id, data }: any) => {
+  const uri = `v1/payments/${_id}/paydate`;
+  const response = patchData({ uri, data });
+  return response;
+};
+
 const handleUpdatePayment = async ({ _id, data }: any) => {
   const uri = `v1/payments/${_id}`;
+  const response = patchData({ data, uri });
+  return response;
+};
+
+const handleUpdatePaymentAmount = async ({ _id, data }: any) => {
+  const uri = `v1/payments/${_id}/update/amount`;
   const response = patchData({ data, uri });
   return response;
 };
@@ -77,8 +90,10 @@ export {
   handleCategoryTotals,
   handleYearTotals,
   handleMemberPayment,
+  handleUpdatePaydate,
   handleMemberPayments,
   handleUpdatePayment,
   handleDeletePayment,
   handleExportPayments,
+  handleUpdatePaymentAmount
 };

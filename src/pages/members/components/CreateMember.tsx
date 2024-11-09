@@ -38,6 +38,7 @@ export default function CreateMember({ isVisible, setVisible }: any) {
       message.success("Created Successfully");
       form.resetFields();
       queryClient.invalidateQueries({ queryKey: ["members"] });
+      queryClient.invalidateQueries({ queryKey: ["corporates"] });
     },
     onError: (error) => {
       message.error(`${error}`);
@@ -155,22 +156,21 @@ export default function CreateMember({ isVisible, setVisible }: any) {
             </Col>
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Form.Item
-                name="membership"
-                label="Membership Category"
+                name="dateRegistered"
+                label="Date Registered"
                 rules={[
                   {
                     required: true,
-                    message: "Please enter membership category",
+                    message: "Please enter date registered",
                   },
                 ]}
               >
-                <Select placeholder="Membership Category">
-                  {memberships?.map((item: any, index: number) => (
-                    <Option key={index} value={item?._id}>
-                      {item?.category}
-                    </Option>
-                  ))}
-                </Select>
+                <DatePicker
+                  type="text"
+                  format={"DD/MM/YYYY"}
+                  style={{ width: "100%" }}
+                  placeholder="Date Registered"
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -208,7 +208,27 @@ export default function CreateMember({ isVisible, setVisible }: any) {
             </Row>
           )}
           <Row gutter={[16, 0]}>
-      
+            <Col xs={{ span: 24 }} lg={{ span: 12 }}>
+              <Form.Item
+                name="membership"
+                label="Membership Category"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter membership category",
+                  },
+                ]}
+              >
+                <Select placeholder="Membership Category">
+                  {memberships?.map((item: any, index: number) => (
+                    <Option key={index} value={item?._id}>
+                      {item?.category}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+
             <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Form.Item
                 name="nextUpgrade"

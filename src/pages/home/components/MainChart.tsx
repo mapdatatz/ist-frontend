@@ -14,7 +14,7 @@ import { handleChartTotals } from "../../../api/payments";
 import formatShort from "../../../utils/formatShort";
 
 export default function MainChart({ year }: any) {
-  const years = [year - 4, year - 3, year - 2, year - 1, year];
+  const years = [year-8, year-7,year-6,year-5,year - 4, year - 3, year - 2, year - 1, year];
   const { data } = useQuery({
     queryKey: ["chartTotals"],
     queryFn: () => handleChartTotals({ years }),

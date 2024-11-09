@@ -1,20 +1,10 @@
-import {
-  Button,
-  Modal,
-  Form,
-  message,
-  Row,
-  Col,
-  Input,
-  DatePicker,
-} from "antd";
+import { Button, Modal, Form, message, Row, Col, Input } from "antd";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import formatMoney from "../../../utils/formatMoney";
-import { handleMemberPayment } from "../../../api/payments";
-import validDates from "../../../utils/validDates";
+import { handleUpdatePaymentAmount } from "../../../api/payments";
 
-export default function MemberPayment({
+export default function UpdatePayment({
   isVisible,
   setVisible,
   selected,
@@ -24,7 +14,7 @@ export default function MemberPayment({
   const [form] = Form.useForm();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: handleMemberPayment,
+    mutationFn: handleUpdatePaymentAmount,
     onSuccess: () => {
       message.success("Updated Successfully");
       form.resetFields();
@@ -39,11 +29,9 @@ export default function MemberPayment({
   });
 
   const onSubmit = async () => {
-    const { paymentRef, paidDate } = await form.getFieldsValue();
+    const { expectedAmount } = await form.getFieldsValue();
     const data = {
-      paidAmount: selected?.expectedAmount,
-      paymentRef,
-      paidDate,
+      expectedAmount,
     };
     await mutate({ _id: selected?._id, data });
     setVisible(false);
@@ -53,12 +41,14 @@ export default function MemberPayment({
     form.resetFields();
   };
 
-  useEffect(() => {}, [selected]);
+  useEffect(() => {
+    form.setFieldsValue({ expectedAmount: selected?.expectedAmount });
+  }, [selected]);
 
   return (
     <Modal
       open={isVisible}
-      title={`Add Payment: ${year}`}
+      title={`Update Payment: ${year}`}
       onCancel={() => setVisible(false)}
       footer={[
         <Button key="back" onClick={clearForm}>
@@ -66,63 +56,43 @@ export default function MemberPayment({
         </Button>,
         <Button
           key="submit"
-          form="memberPayment"
+          form="updatePayment"
           htmlType="submit"
           type="primary"
           onSubmit={onSubmit}
           loading={isPending}
         >
-          Pay
+          Update
         </Button>,
       ]}
     >
       <Form
-        id="memberPayment"
+        id="updatePayment"
         form={form}
         name="normal_login"
         className="login-form"
         onFinish={onSubmit}
         layout="vertical"
       >
-        <div className="flex flex-col justify-center items-center mb-8">
+        <div className="flex flex-col justify-center items-center">
           <div className="text-2xl font-bold">{selected?.name}</div>
-          <div className="">{year} Membership Fee of</div>
           <div className="font-bold">
-            {formatMoney(selected?.expectedAmount)} /=
+            Current Amount: {formatMoney(selected?.expectedAmount)} /=
           </div>
         </div>
         <Row gutter={24}>
-          <Col xs={{ span: 24 }} lg={{ span: 12 }}>
+          <Col xs={{ span: 24 }} lg={{ span: 24 }}>
             <Form.Item
-              name="paymentRef"
-              label="Payment Reference"
+              name="expectedAmount"
+              label="Expected Amount"
               rules={[
                 {
-                  required: false,
-                  message: "Please enter year",
+                  required: true,
+                  message: "Please enter expected amount",
                 },
               ]}
             >
-              <Input type="text" placeholder="Reference Number" />
-            </Form.Item>
-          </Col>
-          <Col xs={{ span: 24 }} lg={{ span: 12 }}>
-            <Form.Item
-              name="paidDate"
-              label="Payment Date"
-              rules={[
-                {
-                  required: false,
-                  message: "Please enter payment date",
-                },
-              ]}
-            >
-              <DatePicker
-                disabledDate={validDates}
-                format={"DD-MM-YYYY"}
-                placeholder="Payment Date"
-                style={{ width: "100%" }}
-              />
+              <Input type="text" placeholder="Expected Amount" />
             </Form.Item>
           </Col>
         </Row>

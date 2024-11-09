@@ -1,5 +1,4 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
-import Cookies from "js-cookie";
 
 const postMail = async ({ data, uri }: any) => {
   try {
@@ -19,6 +18,9 @@ const postMail = async ({ data, uri }: any) => {
       body: JSON.stringify(data),
     });
     if (!response.ok) {
+      if (response.status === 401 || response.status === 403) {
+        sessionStorage.clear();
+      }
       const errorData = await response.json();
       return Promise.reject(errorData.message || "Something went wrong");
     }

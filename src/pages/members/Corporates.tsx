@@ -17,6 +17,7 @@ import { IoLinkOutline } from "react-icons/io5";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
 import MemberTime from "./components/MemberTime";
+import formatId from "../../utils/formatId";
 const { Search } = Input;
 
 export default function Members() {
@@ -140,7 +141,7 @@ export default function Members() {
             {record?.membership?.category}
             <div className="flex">
               <div className="text-xs text-gray-600">
-                IST-{record?.memberId}
+              {formatId(`IST`,record?.memberId)}
               </div>
               <div className="text-xs text-gray-600 mx-2">
                 Since:{" "}
@@ -157,7 +158,7 @@ export default function Members() {
       render: (record: any) => {
         return (
           <div className="flex flex-col justify-start ">
-            <MemberTime date1={record?.createdAt} date2={new Date()} />
+            <MemberTime date1={record?.dateRegistered} date2={new Date()} />
           </div>
         );
       },
@@ -193,11 +194,15 @@ export default function Members() {
       width: 140,
       render: (record: any) => {
         return (
-          <div className="flex flex-col justify-start ">
-            <Moment format="DD/MM/YYYY">{record?.nextUpgrade}</Moment>
-            <span className="text-xs text-gray-600">
-              [ <Moment fromNow>{record?.nextUpgrade}</Moment> ]
-            </span>
+          <div className="">
+            {record?.nextUpgrade && (
+              <div className="flex flex-col justify-start ">
+                <Moment format="DD/MM/YYYY">{record?.nextUpgrade}</Moment>
+                <span className="text-xs text-gray-600">
+                  [ <Moment fromNow>{record?.nextUpgrade}</Moment> ]
+                </span>
+              </div>
+            )}
           </div>
         );
       },

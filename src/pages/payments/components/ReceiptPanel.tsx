@@ -6,6 +6,7 @@ import logo from "../../../assets/images/logoo.jpg";
 import sign from "../../../assets/images/sign.jpg";
 import Moment from "react-moment";
 import formatMoney from "../../../utils/formatMoney";
+import formatId from "../../../utils/formatId";
 
 export default function ReceiptPanel({
   isVisible,
@@ -56,8 +57,8 @@ export default function ReceiptPanel({
         <div className="flex flex-col justify-center w-">
 
         <div className="">Ref No: {selected?.paymentRef}</div>
-        <div className="">Payment Date : <Moment format="DD/MM/YYYY">{selected?.paymentDate}</Moment></div>
-        <div className="mb-8">Received from  <span className="font-bold">{selected?.name}</span> {selected?.memberId ? `with Member ID IST-${selected?.memberId}` : ""}, Being payment for <span className="font-bold">{year}</span> an amount of <span className="font-bold">{formatMoney(selected?.paidAmount)}/ = TZS</span> as a <span className="font-bold">{selected?.membership?.category}</span> member</div>
+        <div className="">Payment Date : <Moment format="DD/MM/YYYY">{selected?.paidDate}</Moment></div>
+        <div className="mb-8">Received from  <span className="font-bold">{selected?.name}</span> {selected?.memberId ? `with Member ID ${formatId(`IST`,selected?.memberId)}` : ""}, Being payment for <span className="font-bold">{year}</span> an amount of <span className="font-bold">{formatMoney(selected?.paidAmount)}/ = TZS</span> as a <span className="font-bold">{selected?.membership?.category}</span> member</div>
         <div className="">With thanks</div>
         <div className=""><img src={sign} width={100} alt="" /></div>
         <div className="font-bold">William Mpeli</div>

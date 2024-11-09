@@ -48,7 +48,7 @@ export default function MainLayout() {
     },
   ];
   return (
-    <div className="flex bg-gray-100 min-h-screen font-ist">
+    <div className="flex bg-gray-100 min-h-screen font-ist text-xxs">
       <div className="w-full">
         <div className="flex">
           {menuOpen && (

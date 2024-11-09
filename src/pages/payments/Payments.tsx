@@ -20,13 +20,22 @@ import { handleFetchYears } from "../../api/years";
 import { AuthContext } from "../../contexts/AuthContext";
 import ReceiptPanel from "./components/ReceiptPanel";
 import { handleFetchInstitute } from "../../api/institute";
+import { LuPlus } from "react-icons/lu";
+import CreatePayment from "./components/CreatePayment";
+import UpdatePaydate from "./components/UpdatePaydate";
+import Moment from "react-moment";
+import { FiEdit } from "react-icons/fi";
+import UpdatePayment from "./components/UpdatePayment";
 const { Search } = Input;
 
 export default function Payments() {
   const { user } = useContext(AuthContext);
   const today = new Date();
   const [selected, setSelected] = useState<any>({});
+  const [createModal, setCreateModal] = useState<boolean>(false);
   const [updateModal, setUpdateModal] = useState<boolean>(false);
+  const [paymentModal, setPaymentModal] = useState<boolean>(false);
+  const [paydateModal, setPaydateModal] = useState<boolean>(false);
   const [receiptModal, setReceiptModal] = useState<boolean>(false);
   const [isExporting, setExporting] = useState<boolean>(false);
   const [year, setYear] = useState({ year: today?.getFullYear() });
@@ -185,8 +194,26 @@ export default function Payments() {
       width: 100,
       render: (record: any) => {
         return (
-          <div className="flex flex-col justify-start text-gray-700">
+          <div className="flex justify-end text-gray-700">
             <div className="">{formatMoney(record?.expectedAmount) || "-"}</div>
+            {user?.isAdmin && (
+              <button
+                onClick={() => {
+                  if (record?.isPaid) return;
+                  setSelected({
+                    ...record,
+                  });
+                  setUpdateModal(true);
+                }}
+                className={`flex justify-center items-center ml-1   px-3 py-1   ${
+                  record?.isPaid
+                    ? "text-gray-200 cursor-not-allowed"
+                    : "text-gray-700 hover:text-yellow-600"
+                }`}
+              >
+                <FiEdit />
+              </button>
+            )}
           </div>
         );
       },
@@ -196,7 +223,7 @@ export default function Payments() {
       width: 100,
       render: (record: any) => {
         return (
-          <div className="flex flex-col justify-start text-gray-700">
+          <div className="flex justify-end text-gray-700">
             <div className=""> {formatMoney(record?.paidAmount) || "-"}</div>
           </div>
         );
@@ -207,8 +234,43 @@ export default function Payments() {
       width: 100,
       render: (record: any) => {
         return (
-          <div className="flex flex-col justify-start text-gray-700">
+          <div className="flex justify-end text-gray-700">
             <div className=""> {formatMoney(record?.remainAmount) || "-"}</div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "PAID DATE",
+      width: 100,
+      render: (record: any) => {
+        return (
+          <div className="flex justify-end">
+            {record?.paidDate ? (
+              <div className="flex flex-col justify-start text-gray-700">
+                <Moment format="DD/MM/YYYY">{record?.paidDate}</Moment>
+              </div>
+            ) : (
+              "-"
+            )}
+
+            {user?.isAdmin && (
+              <div className="">
+                {record?.isPaid && (
+                  <button
+                    onClick={() => {
+                      setSelected({
+                        ...record,
+                      });
+                      setPaydateModal(true);
+                    }}
+                    className="mx-1"
+                  >
+                    <FiEdit />
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         );
       },
@@ -250,18 +312,20 @@ export default function Payments() {
           ) : (
             <div className="">
               {user?.isAdmin ? (
-                <button
-                  onClick={() => {
-                    setSelected({
-                      ...record,
-                    });
-                    setUpdateModal(true);
-                  }}
-                  className="flex justify-center items-center ml-1 text-gray-700 border rounded-md px-3 py-1 bg-green-100 hover:bg-green-200"
-                >
-                  <TfiCreditCard color="green" />{" "}
-                  <span className="ml-1">Pay</span>
-                </button>
+                <div className="flex items-center">
+                  <button
+                    onClick={() => {
+                      setSelected({
+                        ...record,
+                      });
+                      setPaymentModal(true);
+                    }}
+                    className="flex justify-center items-center ml-1 text-gray-700 border rounded-md px-3 py-1 bg-green-100 hover:bg-green-200"
+                  >
+                    <TfiCreditCard color="green" />{" "}
+                    <span className="ml-1">Pay</span>
+                  </button>
+                </div>
               ) : (
                 <button className="flex justify-center items-center ml-1 text-gray-700 border rounded-md px-3 py-1 bg-gray-100 hover:bg-gray-200 cursor-not-allowed">
                   <TfiCreditCard color="gray" />{" "}
@@ -354,6 +418,14 @@ export default function Payments() {
                     </Popover>
                   </div>
                 </div>
+                {user?.isAdmin && (
+                  <button
+                    onClick={() => setCreateModal(true)}
+                    className="flex mx-2 justify-center items-center border px-4 py-1 h-10 hover:bg-gray-100"
+                  >
+                    <LuPlus size={18} /> <span className="mx-2">New</span>
+                  </button>
+                )}
                 <Tooltip title="Export To Excel">
                   <button
                     className="flex mx-2 justify-center items-center border px-4 py-1 h-10 hover:bg-gray-100"
@@ -394,11 +466,33 @@ export default function Payments() {
       </div>
 
       <MemberPayment
+        isVisible={paymentModal}
+        setVisible={setPaymentModal}
+        refetch={refetch}
+        selected={selected}
+        year={year?.year}
+      />
+
+      <UpdatePayment
         isVisible={updateModal}
         setVisible={setUpdateModal}
         refetch={refetch}
         selected={selected}
         year={year?.year}
+      />
+
+      <UpdatePaydate
+        isVisible={paydateModal}
+        setVisible={setPaydateModal}
+        refetch={refetch}
+        selected={selected}
+        year={year?.year}
+      />
+
+      <CreatePayment
+        isVisible={createModal}
+        setVisible={setCreateModal}
+        refetch={handleRefetch}
       />
 
       <ReceiptPanel

@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -8,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 |---------------------------------------------------------------------
 */
 
-import { AuthContext, AuthProvider } from "./contexts/AuthContext";
+import {  AuthProvider } from "./contexts/AuthContext";
 import MainLayout from "./layouts/MainLayout";
 import NotFound from "./pages/redirects/NotFound";
 import Forgot from "./pages/auth/Forgot";
@@ -146,9 +145,9 @@ function App() {
 }
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
-  let { user } = React.useContext(AuthContext);
+  const token = sessionStorage.getItem('token');
   let location = useLocation();
-  if (!user) {
+  if (!token) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
   return children;

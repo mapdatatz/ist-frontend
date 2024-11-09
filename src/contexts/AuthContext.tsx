@@ -1,5 +1,5 @@
 import { message } from "antd";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext<any>(null!);
@@ -72,6 +72,14 @@ const AuthProvider = ({ children }: any) => {
   }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+
+export const useAuth = () => {
+  const context: any = useContext(AuthContext);
+  console.log(context, "context :::::::>>>>>")
+  context.signoutUser()
+  return;
 };
 
 export { AuthContext, AuthProvider };

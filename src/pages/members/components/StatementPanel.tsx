@@ -5,6 +5,7 @@ import { AiOutlineClose, AiOutlinePrinter } from "react-icons/ai";
 import logo from "../../../assets/images/logo.jpg";
 import Moment from "react-moment";
 import formatMoney from "../../../utils/formatMoney";
+import formatId from "../../../utils/formatId";
 
 export default function StatementPanel({
   isVisible,
@@ -90,7 +91,7 @@ export default function StatementPanel({
               <div className="truncate">
                 Membership: {selected?.membership?.category || "-"}
               </div>
-              <div className="">Member ID: IST-{selected?.memberId}</div>
+              <div className="">Member ID: {formatId(`IST`,selected?.memberId)}</div>
               <div className="text-white">-</div>
             </div>
           </div>

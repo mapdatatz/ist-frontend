@@ -15,6 +15,9 @@ import { ImFilePdf } from "react-icons/im";
 import { handleMemberPayments } from "../../api/payments";
 import { handleFetchInstitute } from "../../api/institute";
 import MemberDetails from "./components/MemberDetails";
+import formatId from "../../utils/formatId";
+import Moment from "react-moment";
+import MemberTime from "./components/MemberTime";
 
 export default function Member({}: any) {
   const { user } = useContext(AuthContext);
@@ -48,7 +51,9 @@ export default function Member({}: any) {
         <div className="grid grid-cols-12 bg-white">
           <div className="col-span-12">
             <div className="flex justify-between border-b mx-4 my-4 pb-4">
-              <div className="flex">
+              <div className="grid grid-cols-12 gap-x-2 w-full">
+
+              <div className="col-span-12 sm:col-span-4 flex ">
                 <div className="border w-36 h-36 mr-4 flex justify-center items-center">
                   {member?.isCorporate ? (
                     <BiBuildingHouse size={70} />
@@ -83,7 +88,7 @@ export default function Member({}: any) {
                       </span>
                     )}
                     <div className="text-xs text-gray-600">
-                      Member ID : IST-{member?.memberId}
+                      Member ID : {formatId(`IST`,member?.memberId)}
                     </div>
                   </div>
                   <div className="">Email: {member?.email || "-"}</div>
@@ -93,7 +98,15 @@ export default function Member({}: any) {
                   </div>
                 </div>
               </div>
-              <div className="">
+              <div className="col-span-12 sm:col-span-4 flex flex-col justify-start items-start ">
+                  <div className="">Member Since: <Moment format="Do MMM, YYYY">{member?.dateRegistered}</Moment></div>
+                  <div className="flex items-center">Tenure: {" "}    <MemberTime date1={member?.dateRegistered} date2={new Date()} /></div>
+          
+                  <div className="flex items-center">
+                    Next Upgrade: <Moment format="Do MMM, YYYY">{member?.nextUpgrade}</Moment>
+                  </div>
+              </div>
+              <div className="col-span-12 sm:col-span-4 flex flex-col items-end">
                 <div className="mb-2">
                   <button
                     onClick={() => setStatementModal(true)}
@@ -122,6 +135,7 @@ export default function Member({}: any) {
                   </div>
                 )}
               </div>
+            </div>
             </div>
 
             <div className="m-4">

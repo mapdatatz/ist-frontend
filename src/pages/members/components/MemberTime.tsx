@@ -20,7 +20,7 @@ export default function MemberTime({date1, date2}: any) {
 
   return (
     <div>
-      {years ? `${years} Year(s)` : null} {months ? `${months} Month(s)` : null}
+      {years ? `${years} Year(s)` : null} {months ? `${months} Month(s)` : "Less than a month"}
     </div>
   );
 }
