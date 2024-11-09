@@ -3,9 +3,6 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 export default function LinearLink({ to, title }: any) {
   let resolved = useResolvedPath(to);
   let match = useMatch({ path: resolved.pathname, end: false });
-
-  console.log(match, to);
-
   return (
     <div
       className={`mr-1 ${

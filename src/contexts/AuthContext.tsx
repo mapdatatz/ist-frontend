@@ -1,5 +1,5 @@
 import { message } from "antd";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext<any>(null!);
@@ -8,8 +8,6 @@ function getInitialUser() {
   const user = sessionStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 }
-
-
 
 function getInitialToken() {
   const token = sessionStorage.getItem("token");
@@ -27,10 +25,10 @@ const AuthProvider = ({ children }: any) => {
     const { user, token } = payload;
     if (token) {
       sessionStorage.setItem("user", JSON.stringify(user));
-      sessionStorage.setItem("token",token);
+      sessionStorage.setItem("token", token);
       setUser(user);
-      setToken(token)
-      navigate('/dashboard')
+      setToken(token);
+      navigate("/dashboard");
       message.success("Logged in successfully");
     }
   };
@@ -72,14 +70,6 @@ const AuthProvider = ({ children }: any) => {
   }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
-
-
-export const useAuth = () => {
-  const context: any = useContext(AuthContext);
-  console.log(context, "context :::::::>>>>>")
-  context.signoutUser()
-  return;
 };
 
 export { AuthContext, AuthProvider };
