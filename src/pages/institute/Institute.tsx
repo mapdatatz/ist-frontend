@@ -10,7 +10,7 @@ import NoAccess from "../../components/shared/NoAccess";
 import { handleFetchInstitute } from "../../api/institute";
 import { FiEdit } from "react-icons/fi";
 import logo from "../../assets/images/logo.jpg";
-import sign from "../../assets/images/sign.jpg";
+import sign from "../../assets/images/sign.png";
 
 export default function Institute() {
   const { user } = useContext(AuthContext);
@@ -132,7 +132,7 @@ export default function Institute() {
                 <div className="mb-4">
                   <img src={logo} width={150} alt="" />
                 </div>
-                <div className="border-b pb-2 mb-2">Burser Signature</div>
+                <div className="border-b pb-2 mb-2">Treasurer Signature</div>
                 <img src={sign} width={100} alt="" />
               </div>
             </div>
